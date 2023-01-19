@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, nextTick } from 'vue'
 import Viewer from 'viewerjs'
+import { Waterfall } from 'vue-waterfall-plugin-next'
 
 let imageList = ref([])
 
@@ -30,22 +31,24 @@ const initView = () => {
 </script>
 
 <template>
-  <div id="images">
-    <div v-for="item in imageList" :key="item">
+  <div id="images" class="platform-content">
+    <!-- <div v-for="item in imageList" :key="item">
       <img :src="`/current/${item}`" alt="" />
-    </div>
-  </div>  
+    </div> -->
+    <Waterfall :list="imageList" :width="200" :gutter="20">
+      <template #item="{ item }">
+        <div class="item">
+          <img :src="`/current/${item}`" alt="" />
+        </div>
+      </template>
+    </Waterfall>
+  </div>
 </template>
 
 <style lang="less" scoped>
 .platform-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  &-bottom {
+  .item {
     width: 100%;
-    height: calc(100% - 61px);
-    display: flex;
   }
 }
 </style>
