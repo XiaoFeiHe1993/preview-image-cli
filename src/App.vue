@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
 import Viewer from 'viewerjs'
 
 let imageList = ref([])
@@ -11,9 +11,9 @@ onMounted(() => {
     }).then((json) => {
       console.log('fetch json', json)
       imageList.value = json
-      setTimeout(() => {
+      nextTick(() => {
         initView()
-      }, 3000)
+      })
     }).catch((error) => {
       console.log('fetch failed', error)
     })
@@ -32,7 +32,7 @@ const initView = () => {
 <template>
   <div id="images">
     <div v-for="item in imageList" :key="item">
-      <img :src="`http://localhost:7001/current/${item}`" alt="" />
+      <img :src="`/current/${item}`" alt="" />
     </div>
   </div>  
 </template>
