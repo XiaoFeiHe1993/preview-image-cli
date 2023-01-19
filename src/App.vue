@@ -1,21 +1,40 @@
 <script setup>
-// import fetchJsonp from 'fetch-jsonp'
-// import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import Viewer from 'viewerjs'
 
-// onMounted(() => {
-//   fetchJsonp('/getImages')
-//     .then(function(response) {
-//       return response.json()
-//     }).then(function(json) {
-//       console.log('parsed json', json)
-//     }).catch(function(ex) {
-//       console.log('parsing failed', ex)
-//     })
-// })
+let imageList = ref([])
+
+onMounted(() => {
+  window.fetch('/getImages')
+    .then(function(response) {
+      return response.json()
+    }).then((json) => {
+      console.log('fetch json', json)
+      imageList.value = json
+      setTimeout(() => {
+        initView()
+      }, 3000)
+    }).catch((error) => {
+      console.log('fetch failed', error)
+    })
+})
+
+const initView = () => {
+  const viewer = new Viewer(document.getElementById('images'), {
+    button: true,
+    viewed() {
+      viewer.zoomTo(1)
+    },
+  })
+}
 </script>
 
 <template>
-  <div>?????</div>  
+  <div id="images">
+    <div v-for="item in imageList" :key="item">
+      <img :src="`http://localhost:7001/current/${item}`" alt="" />
+    </div>
+  </div>  
 </template>
 
 <style lang="less" scoped>
