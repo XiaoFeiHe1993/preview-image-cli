@@ -61,12 +61,11 @@ function initServer(port) {
 portfinder.getPort({
   port: 7000,    // minimum port
   stopPort: 65535 // maximum port
-}, (port) => {
+}, (error, port) => {
   if (port) {
     console.log('current use port:', port)
     initServer(port)
   } else {
-    console.log('can not find port')
+    console.log('can not find port', error)
   }
 })
-
