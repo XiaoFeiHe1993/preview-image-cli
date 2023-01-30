@@ -7,7 +7,7 @@ import { Waterfall } from 'vue-waterfall-plugin-next'
 let imageList = ref([])
 
 const videoOptions = ref({
-  autoplay: true,
+  autoplay: false,
   controls: true,
   loadingSpinner: false,
   errorDisplay: false,

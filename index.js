@@ -35,8 +35,13 @@ function initServer(port) {
   app.use(json({pretty:false, param:'pretty'}))
   
   app.use(router.routes()).use(router.allowedMethods())
-  
+
+  app.on("error", (err, ctx) => {
+    // console.error(err)
+  })
+
   app.listen(port)
+    
   
   glob('**/*.*(png|svg|jpg|jpeg|webp|gif|apng|mp4)',
     {
