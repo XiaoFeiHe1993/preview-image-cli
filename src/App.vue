@@ -1,9 +1,16 @@
 <script setup>
 import { onMounted, ref, nextTick } from 'vue'
 import Viewer from 'viewerjs'
+import VideoPlayer from './components/VideoPlayer.vue'
 import { Waterfall } from 'vue-waterfall-plugin-next'
 
 let imageList = ref([])
+
+const videoOptions = ref({
+  autoplay: true,
+  controls: true,
+  height: 200,
+})
 
 onMounted(() => {
   window.fetch('/getImages')
@@ -37,8 +44,11 @@ const initView = () => {
     </div> -->
     <Waterfall :list="imageList" :width="200" :gutter="20">
       <template #item="{ item }">
-        <div class="item">
+        <div class="item" v-if="item.indexOf('.mp4') < 0">
           <img :src="`/current/${item}`" :alt="item" :title="`\/${item}`" />
+        </div>
+        <div class="item" v-else>
+          <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4'}] }" />
         </div>
       </template>
     </Waterfall>
