@@ -38,7 +38,7 @@ const initView = () => {
     <Waterfall :list="imageList" :width="200" :gutter="20">
       <template #item="{ item }">
         <div class="item">
-          <img :src="`/current/${item}`" alt="" />
+          <img :src="`/current/${item}`" :alt="item" :title="`\/${item}`" />
         </div>
       </template>
     </Waterfall>
@@ -49,6 +49,13 @@ const initView = () => {
 .platform-content {
   .item {
     width: 100%;
+    height: 200px;
+    background-color: black;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: scale-down;
+    }
   }
 }
 </style>
