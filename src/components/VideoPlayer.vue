@@ -1,6 +1,6 @@
 <template>
   <div class="video-player">
-    <video ref="videoPlayer" class="video-js"></video>
+    <video ref="videoPlayer" class="video-js" :width="200" :height="200"></video>
   </div>
 </template>
 
@@ -36,9 +36,13 @@ onUnmounted(() => {
 
 <style lang="less" scoped>
 .video-player {
-  width: 100%;
-  height: 200px;
+  // width: 100%;
+  // height: 200px;
   .video-js {
+    :deep(.vjs-tech) {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

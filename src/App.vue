@@ -9,7 +9,11 @@ let imageList = ref([])
 const videoOptions = ref({
   autoplay: true,
   controls: true,
-  height: 200,
+  loadingSpinner: false,
+  errorDisplay: false,
+  textTrackSettings: false,
+  bigPlayButton: true,
+  controlBar: false,
 })
 
 onMounted(() => {
@@ -48,7 +52,7 @@ const initView = () => {
           <img :src="`/current/${item}`" :alt="item" :title="`\/${item}`" />
         </div>
         <div class="item" v-else>
-          <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4'}] }" />
+          <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4' }] }" />
         </div>
       </template>
     </Waterfall>
@@ -60,12 +64,26 @@ const initView = () => {
   .item {
     width: 100%;
     height: 200px;
+    position: relative;
+    z-index: 999;
     background-color: black;
     img {
       width: 100%;
       height: 100%;
       object-fit: scale-down;
     }
+  }
+  :deep(.waterfall-item) {
+    z-index: 999;
+  }
+  :deep(.waterfall-card) {
+    z-index: 999;
+  }
+  :deep(.vjs-big-play-button) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>
