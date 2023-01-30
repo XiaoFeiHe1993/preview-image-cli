@@ -41,7 +41,6 @@ function initServer(port) {
   })
 
   app.listen(port)
-    
   
   glob('**/*.*(png|svg|jpg|jpeg|webp|gif|apng|mp4)',
     {
