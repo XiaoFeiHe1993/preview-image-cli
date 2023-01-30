@@ -1,6 +1,6 @@
 <template>
   <div class="video-player">
-    <video ref="videoPlayer" class="video-js" :width="200" :height="200"></video>
+    <video ref="videoPlayer" class="video-js" :width="width" :height="height"></video>
   </div>
 </template>
 
@@ -16,6 +16,14 @@ const props = defineProps({
   options: {
     type: Object,
     default: () => {},
+  },
+  width: {
+    type: Number,
+    default: 200,
+  },
+  height: {
+    type: Number,
+    default: 200,
   }
 })
 
