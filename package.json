@@ -1,5 +1,5 @@
 {
-  "name": "prview-image-cli",
+  "name": "preview-image-cli",
   "version": "0.0.6",
   "description": "",
   "main": "./index.js",
