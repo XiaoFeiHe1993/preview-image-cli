@@ -9,7 +9,7 @@
 ### 使用
 
 ```
-npm i -g prview-image-cli
+npm i -g preview-image-cli
 
 > cd demo-project
 
