@@ -76,12 +76,16 @@ const onRadioChange = (value) => {
       <el-radio-button label="apng" />
       <el-radio-button label="mp4" />
       <el-radio-button label="pdf" />
+      <el-radio-button label="xmind" />
     </el-radio-group>
     </div>
     <Waterfall :list="showList" :width="200" :gutter="20">
       <template #item="{ item }">
         <div class="item" v-if="item.indexOf('.pdf') > -1" @click="handleOpenPdf(`/current/${item}`)">
           <span class="pdf">{{ item.slice(item.lastIndexOf('/') + 1) }}</span>
+        </div>
+        <div class="item" v-else-if="item.indexOf('.xmind') > -1">
+          <span class="xmind">{{ item.slice(item.lastIndexOf('/') + 1) }}</span>
         </div>
         <div class="item" v-else-if="item.indexOf('.mp4') > -1">
           <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4' }] }" />
@@ -117,6 +121,10 @@ const onRadioChange = (value) => {
       object-fit: scale-down;
     }
     .pdf {
+      color: white;
+      font-size: 18px;
+    }
+    .xmind {
       color: white;
       font-size: 18px;
     }
