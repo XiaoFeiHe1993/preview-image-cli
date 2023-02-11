@@ -55,7 +55,7 @@ function initServer(port) {
         imgFiles = files
         open(`http://localhost:${port}/process/dist/index.html`)
       } else if (!files || files.length <= 0) {
-        console.log('glob can not find images')
+        console.log('can not find assets')
         process.exit(0)
       }
     }
