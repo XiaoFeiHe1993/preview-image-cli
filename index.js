@@ -44,7 +44,7 @@ function initServer(port) {
   
   glob('**/*.*(png|svg|jpg|jpeg|webp|gif|apng|mp4|pdf|xmind)',
     {
-      ignore: '**/node_modules/**',
+      ignore: ['**/node_modules/**', '**/dist/**'],
       cwd: rootPath,
     },
     (error, files) => {
