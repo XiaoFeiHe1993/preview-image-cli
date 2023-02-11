@@ -42,7 +42,7 @@ function initServer(port) {
 
   app.listen(port)
   
-  glob('**/*.*(png|svg|jpg|jpeg|webp|gif|apng|mp4)',
+  glob('**/*.*(png|svg|jpg|jpeg|webp|gif|apng|mp4|pdf)',
     {
       ignore: '**/node_modules/**',
       cwd: rootPath,

@@ -39,6 +39,10 @@ const initView = () => {
     },
   })
 }
+
+const handleOpenPdf = (url) => {
+  window.open(url)
+}
 </script>
 
 <template>
@@ -48,11 +52,14 @@ const initView = () => {
     </div> -->
     <Waterfall :list="imageList" :width="200" :gutter="20">
       <template #item="{ item }">
-        <div class="item" v-if="item.indexOf('.mp4') < 0">
-          <img :src="`/current/${item}`" :alt="item" :title="`\/${item}`" />
+        <div class="item" v-if="item.indexOf('.pdf') > -1" @click="handleOpenPdf(`/current/${item}`)">
+          <span class="pdf">PDF</span>
+        </div>
+        <div class="item" v-else-if="item.indexOf('.mp4') > -1">
+          <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4' }] }" />
         </div>
         <div class="item" v-else>
-          <video-player :options="{ ...videoOptions, sources: [{ src: `/current/${item}`, type: 'video/mp4' }] }" />
+          <img :src="`/current/${item}`" :alt="item" :title="`\/${item}`" />
         </div>
       </template>
     </Waterfall>
@@ -64,6 +71,9 @@ const initView = () => {
   .item {
     width: 100%;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     z-index: 999;
     background-color: black;
@@ -71,6 +81,10 @@ const initView = () => {
       width: 100%;
       height: 100%;
       object-fit: scale-down;
+    }
+    .pdf {
+      color: white;
+      font-size: 32px;
     }
   }
   :deep(.waterfall-item) {
